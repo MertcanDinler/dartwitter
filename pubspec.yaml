@@ -1,0 +1,15 @@
+name: dartwitter
+description: A Twitter API wrapper library for Dart developers.
+version: 1.0.0
+
+environment:
+  sdk: '>=2.7.0 <3.0.0'
+
+dependencies:
+  http: ^0.12.0+4
+  oauth1_client:
+    git: https://github.com/mrtcndnlr/oauth1_client
+
+dev_dependencies:
+  pedantic: ^1.8.0
+  test: ^1.6.0
