@@ -1,3 +1,14 @@
+//
+// Author: Mertcan Dinler (mertdinlerin@gmail.com)
+// auth_base.dart (c) 2020
+//
+// This software is released under the MIT License.
+// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+//
+// Created:  2020-04-18T21:59:38.051Z
+// Modified: 2020-04-18T22:05:39.349Z
+//
+
 import 'package:oauth1_client/oauth1_client.dart' as oauth1_client;
 
 import '../models/access_token.dart';
@@ -15,6 +26,8 @@ class OAuth1Handler extends AuthBase {
     _oauth1.signatureMethod = oauth1_client.Signatures.hmacSha1;
   }
 
+  /// After user has authorized the request token, get access token
+  /// with user supplied verifier.
   Future<AccessToken> getAccessToken(String verifier) async {
     var accessToken =
         await _oauth1.fetchAccessToken(_getOAuthUrl('access_token'), verifier);

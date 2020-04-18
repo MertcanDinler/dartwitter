@@ -1,3 +1,14 @@
+//
+// Author: Mertcan Dinler (mertdinlerin@gmail.com)
+// access_token.dart (c) 2020
+//
+// This software is released under the MIT License.
+// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+//
+// Created:  2020-04-18T22:00:00.950Z
+// Modified: 2020-04-18T22:05:41.482Z
+//
+
 import 'dart:convert';
 
 class AccessToken {
