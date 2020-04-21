@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T13:10:33.763Z
-// Modified: 2020-04-21T13:18:54.854Z
+// Modified: 2020-04-21T15:10:51.096Z
 //
 
 /// The User object contains Twitter User account metadata that describes the
