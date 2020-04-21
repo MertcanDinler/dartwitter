@@ -6,10 +6,11 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-18T21:57:16.016Z
-// Modified: 2020-04-18T22:05:44.903Z
+// Modified: 2020-04-20T10:37:33.556Z
 //
 
 library dartwitter;
 
 export 'src/auth/oauth1_handler.dart';
-export 'src/dartwitter_exception.dart';
+export 'src/dartwitter_error.dart';
+export 'src/api.dart';

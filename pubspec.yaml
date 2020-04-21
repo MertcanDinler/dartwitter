@@ -9,7 +9,11 @@ dependencies:
   http: ^0.12.0+4
   oauth1_client:
     git: https://github.com/mrtcndnlr/oauth1_client
+  json_annotation: ^3.0.1
+  
 
 dev_dependencies:
   pedantic: ^1.8.0
   test: ^1.6.0
+  build_runner: ^1.8.1
+  json_serializable: ^3.3.0

@@ -6,19 +6,19 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-18T22:00:12.789Z
-// Modified: 2020-04-18T22:05:43.212Z
+// Modified: 2020-04-20T10:37:52.317Z
 //
 
-class DartwitterException implements Exception {
+class DartwitterError implements Exception {
   /// A message describing the format error.
   final String message;
 
   /// Creates a new DartwitterError with an optional error [message].
-  const DartwitterException([this.message = '']);
+  const DartwitterError([this.message = '']);
 
   @override
   String toString() {
-    if (message == null) return 'DartwitterException';
-    return 'DartwitterException: $message';
+    if (message == null) return 'DartwitterError';
+    return 'DartwitterError: $message';
   }
 }

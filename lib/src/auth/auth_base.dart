@@ -6,11 +6,10 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-18T22:04:11.309Z
-// Modified: 2020-04-18T22:05:37.205Z
+// Modified: 2020-04-20T13:46:10.869Z
 //
 import 'package:http/http.dart' as http;
 
 abstract class AuthBase {
-  http.BaseClient _client;
-  http.BaseClient get client => _client;
+  http.BaseClient get client;
 }

@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-18T21:59:38.051Z
-// Modified: 2020-04-19T15:26:05.257Z
+// Modified: 2020-04-20T13:46:14.194Z
 //
 
 import 'package:oauth1_client/oauth1_client.dart' as auth;
@@ -20,17 +20,24 @@ class OAuth1Handler extends AuthBase {
   final String _oAuthUrl = 'https://api.twitter.com/oauth/';
   auth.OAuth1Client _oauth1;
   String _authorizedUsername;
-  http.BaseClient _client;
+  AccessToken _token;
 
   OAuth1Handler(String apiKey, String apiKeySecret, {callbackUrl = 'oob'}) {
     var credentials = auth.ConsumerCredentials(apiKey, apiKeySecret,
         callbackUrl: callbackUrl);
     _oauth1 = auth.OAuth1Client(credentials);
     _oauth1.signatureMethod = auth.Signatures.hmacSha1;
-    _client = _oauth1.client;
   }
 
   String get authorizedUsername => _authorizedUsername;
+  AccessToken get accessToken => _token;
+  set accessToken(AccessToken token) {
+    _token = token;
+    _oauth1.token = auth.TokenCredentials(token.token, token.secret);
+  }
+
+  @override
+  http.BaseClient get client => _oauth1.client;
 
   /// After user has authorized the request token, get access token
   /// with user supplied verifier.
@@ -41,7 +48,8 @@ class OAuth1Handler extends AuthBase {
     if (splitResp.containsKey('screen_name')) {
       _authorizedUsername = splitResp['screen_name'];
     }
-    return AccessToken(accessToken.identifier, accessToken.secret);
+    _token = AccessToken(accessToken.identifier, accessToken.secret);
+    return _token;
   }
 
   /// Get the authorization URL to redirect the user
