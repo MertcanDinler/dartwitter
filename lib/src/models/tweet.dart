@@ -6,8 +6,13 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T12:55:38.389Z
-// Modified: 2020-04-21T13:18:46.944Z
+// Modified: 2020-04-22T21:08:41.113Z
 //
+
+import 'coordinates.dart';
+import 'entities.dart';
+import 'place.dart';
+import 'user.dart';
 
 /// Tweets are the basic atomic building block of all things Twitter. Tweets are
 /// also known as “status updates.” The Tweet object has a long list of
@@ -25,9 +30,9 @@ class Tweet {
   int inReplyToStatusId;
   int inReplyToUseId;
   String inReplyToScreenName;
-  // TODO User user;
-  // TODO Coordinates coordinates;
-  // TODO Places place;
+  User user;
+  Coordinates coordinates;
+  List<Place> places;
   int quotedStatusId;
   bool isQuoteStatus;
   Tweet quotedStatus;
@@ -36,7 +41,7 @@ class Tweet {
   int replyCount;
   int retweetCount;
   int favoriteCount;
-  // TODO Entities entities;
+  Entities entities;
   // TODO ExtendedEntities extendedEntities;
   bool favorited;
   bool retweeted;
