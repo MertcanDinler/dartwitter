@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T13:52:09.631Z
-// Modified: 2020-04-21T15:09:23.686Z
+// Modified: 2020-04-21T20:43:22.254Z
 //
 
 class Media {
@@ -49,6 +49,34 @@ class Media {
   /// directly into the raw Tweet text, and the values for the indices
   /// parameter.
   String url;
+  Media();
+  factory Media.fromMap(Map<String, dynamic> map) {
+    return Media()
+      ..id = (map['id'] as int)
+      ..indices = (map['indices'] as List<int>)
+      ..mediaUrl = (map['media_url'] as String)
+      ..mediaUrlHttps = (map['media_url_https'] as String)
+      ..displayUrl = (map['display_url'] as String)
+      ..expandedUrl = (map['expanded_url'] as String)
+      ..sizes = MediaSize(map['sizes'], map['media_url_https'])
+      ..sourceStatusId = (map['source_status_id'] as int)
+      ..type = (map['type'] as String)
+      ..url = (map['url'] as String);
+  }
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'indices': indices,
+      'media_url': mediaUrl,
+      'media_url_https': mediaUrlHttps,
+      'display_url': displayUrl,
+      'expanded_url': expandedUrl,
+      'sizes': sizes.toMap(),
+      'source_status_id': sourceStatusId,
+      'type': type,
+      'url': url
+    };
+  }
 }
 
 class MediaSize {
@@ -63,6 +91,33 @@ class MediaSize {
 
   /// Information for a small-sized version of the media.
   Size small;
+
+  MediaSize(Map<String, Map<String, dynamic>> sizes, String url) {
+    if (sizes.containsKey('thumb')) {
+      thumb = Size(sizes['thumb']['w'], sizes['thumb']['h'],
+          sizes['thumb']['resize'], url, 'thumb');
+    }
+    if (sizes.containsKey('large')) {
+      large = Size(sizes['large']['w'], sizes['large']['h'],
+          sizes['large']['resize'], url, 'large');
+    }
+    if (sizes.containsKey('medium')) {
+      medium = Size(sizes['medium']['w'], sizes['medium']['h'],
+          sizes['medium']['resize'], url, 'medium');
+    }
+    if (sizes.containsKey('small')) {
+      small = Size(sizes['small']['w'], sizes['small']['h'],
+          sizes['small']['resize'], url, 'small');
+    }
+  }
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'thumb': thumb?.toMap(),
+      'large': large?.toMap(),
+      'medium': medium?.toMap(),
+      'small': small?.toMap()
+    };
+  }
 }
 
 class Size {
@@ -80,4 +135,12 @@ class Size {
 
   /// Sized media url
   String url;
+  Size(this.w, this.h, this.resize, String url, String size) {
+    var ext = url.split('.').last;
+    this.url = url.replaceAll('.$ext', '') + '?format=$ext&name=$size';
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{'w': w, 'h': h, 'resize': resize, 'url': url};
+  }
 }

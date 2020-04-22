@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-19T21:31:23.019Z
-// Modified: 2020-04-20T19:26:56.791Z
+// Modified: 2020-04-21T21:34:02.299Z
 //
 
 import 'package:dartwitter/src/api_base.dart';
@@ -25,7 +25,7 @@ class Api extends ApiBase {
 
   @override
   Future<String> request(String method, String endPoint,
-      {Map<String, String> parameters}) async {
+      {Map<String, dynamic> parameters}) async {
     var response = '';
     var uri = _apiUri.replace(path: '${_apiUri.path}$endPoint.json');
     if (method == 'GET') {
