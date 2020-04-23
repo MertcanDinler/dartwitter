@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-19T21:31:23.019Z
-// Modified: 2020-04-23T12:09:56.426Z
+// Modified: 2020-04-23T22:04:38.147Z
 //
 
 import 'package:dartwitter/src/api_base.dart';
@@ -32,6 +32,10 @@ class Api extends ApiBase with Timeline {
     if (method == 'GET') {
       uri = uri.replace(queryParameters: parameters);
       var res = await _client.get(uri.toString());
+      response = res.body;
+    }
+    if (method == 'POST') {
+      var res = await _client.post(uri, body: parameters);
       response = res.body;
     }
     return response;
