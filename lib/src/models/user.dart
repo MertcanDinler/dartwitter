@@ -6,8 +6,12 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T13:10:33.763Z
-// Modified: 2020-04-21T15:10:51.096Z
+// Modified: 2020-04-23T12:13:22.833Z
 //
+
+import 'dart:convert';
+
+import '../utils.dart';
 
 /// The User object contains Twitter User account metadata that describes the
 /// Twitter User referenced. Users can author Tweets, Retweet, quote other Users
@@ -30,6 +34,7 @@ class User {
   int listedCount;
   int favouritesCount;
   int statusesCount;
+  String _createdAt;
   DateTime createdAt;
   String profileBannerUrl;
   String profileImageUrlHttps;
@@ -37,4 +42,96 @@ class User {
   bool defaultProfileImage;
   List<String> withheldInCountries;
   String withheldScope;
+  User({
+    this.id,
+    this.name,
+    this.screenName,
+    this.location,
+    this.derived,
+    this.url,
+    this.description,
+    this.protected,
+    this.verified,
+    this.followersCount,
+    this.friendsCount,
+    this.listedCount,
+    this.favouritesCount,
+    this.statusesCount,
+    String createdAt,
+    this.profileBannerUrl,
+    this.profileImageUrlHttps,
+    this.defaultProfile,
+    this.defaultProfileImage,
+    this.withheldInCountries,
+    this.withheldScope,
+  }) {
+    _createdAt = createdAt;
+    this.createdAt = dateTimeFromString(createdAt);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'screen_name': screenName,
+      'location': location,
+      'derived': derived,
+      'url': url,
+      'description': description,
+      'protected': protected,
+      'verified': verified,
+      'followers_count': followersCount,
+      'friends_count': friendsCount,
+      'listed_count': listedCount,
+      'favourites_count': favouritesCount,
+      'statuses_count': statusesCount,
+      'created_at': _createdAt,
+      'profile_banner_url': profileBannerUrl,
+      'profile_image_url_https': profileImageUrlHttps,
+      'default_profile': defaultProfile,
+      'default_profile_image': defaultProfileImage,
+      'withheld_in_countries':
+          List<String>.from(withheldInCountries.map((x) => x)),
+      'withheld_scope': withheldScope,
+    };
+  }
+
+  static User fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return User(
+      id: map['id'],
+      name: map['name'],
+      screenName: map['screen_name'],
+      location: map['location'],
+      derived: map['derived'],
+      url: map['url'],
+      description: map['description'],
+      protected: map['protected'],
+      verified: map['verified'],
+      followersCount: map['followers_count'],
+      friendsCount: map['friends_count'],
+      listedCount: map['listed_count'],
+      favouritesCount: map['favourites_count'],
+      statusesCount: map['statuses_count'],
+      createdAt: map['created_at'],
+      profileBannerUrl: map['profile_banner_url'],
+      profileImageUrlHttps: map['profile_image_url_https'],
+      defaultProfile: map['default_profile'],
+      defaultProfileImage: map['default_profile_image'],
+      withheldInCountries: map.containsKey('withheld_in_countries')
+          ? List<String>.from(map['withheld_in_countries'])
+          : null,
+      withheldScope: map['withheld_scope'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  static User fromJson(String source) => fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'User(id: $id, screenName: $screenName, name: $name)';
+  }
 }

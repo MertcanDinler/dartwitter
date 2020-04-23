@@ -6,15 +6,47 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-18T22:00:00.950Z
-// Modified: 2020-04-20T21:41:56.473Z
+// Modified: 2020-04-23T11:15:37.470Z
 //
-import 'package:json_annotation/json_annotation.dart';
-part 'access_token.g.dart';
 
-@JsonSerializable()
+import 'dart:convert';
+
 class AccessToken {
   final String token;
   final String secret;
 
-  AccessToken(this.token, this.secret);
+  AccessToken(
+    this.token,
+    this.secret,
+  );
+
+  Map<String, String> toMap() {
+    return {
+      'access_token': token,
+      'access_token_secret': secret,
+    };
+  }
+
+  static AccessToken fromMap(Map<String, String> map) {
+    if (map == null) return null;
+
+    return AccessToken(
+      map['access_token'],
+      map['access_token_secret'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  static AccessToken fromJson(String source) => fromMap(json.decode(source));
+
+  @override
+  String toString() => 'AccessToken(token: $token, secret: $secret)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is AccessToken && o.token == token && o.secret == secret;
+  }
 }
