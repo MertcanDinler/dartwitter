@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-22T21:09:45.954Z
-// Modified: 2020-04-23T21:26:13.361Z
+// Modified: 2020-04-24T21:44:30.521Z
 //
 
 import 'dart:convert';
@@ -60,12 +60,13 @@ mixin Timeline on ApiBase {
     }
     var method = 'GET';
     var endPoint = 'statuses/user_timeline';
-    var parameters = <String, String>{};
-    if (userId != null) parameters['user_id'] = userId.toString();
-    if (screenName != null) parameters['screen_name'] = screenName;
-    if (count != null) parameters['count'] = count.toString();
-    if (sinceId != null) parameters['since_id'] = sinceId.toString();
-    if (maxId != null) parameters['max_id'] = maxId.toString();
+    var parameters = {
+      'user_id': userId.toString(),
+      'screen_name': screenName,
+      'count': count.toString(),
+      'since_id': sinceId.toString(),
+      'max_id': maxId.toString()
+    };
     if (excludeReplies != null) {
       parameters['exclude_replies'] = excludeReplies.toString();
     }
@@ -84,10 +85,11 @@ mixin Timeline on ApiBase {
       {int count, int sinceId, int maxId}) async {
     var method = 'GET';
     var endPoint = 'statuses/mentions_timeline';
-    var parameters = <String, String>{};
-    if (count != null) parameters['count'] = count.toString();
-    if (sinceId != null) parameters['since_id'] = sinceId.toString();
-    if (maxId != null) parameters['max_id'] = maxId.toString();
+    var parameters = {
+      'count': count.toString(),
+      'since_id': sinceId.toString(),
+      'max_id': maxId.toString()
+    };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
     return List<Tweet>.from(decoded.map((t) => Tweet.fromMap(t)));
@@ -102,10 +104,11 @@ mixin Timeline on ApiBase {
   Future<List<Tweet>> retweetsOfMe({int count, int sinceId, int maxId}) async {
     var method = 'GET';
     var endPoint = 'statuses/retweets_of_me';
-    var parameters = <String, String>{};
-    if (count != null) parameters['count'] = count.toString();
-    if (sinceId != null) parameters['since_id'] = sinceId.toString();
-    if (maxId != null) parameters['max_id'] = maxId.toString();
+    var parameters = {
+      'count': count.toString(),
+      'since_id': sinceId.toString(),
+      'max_id': maxId.toString()
+    };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
     return List<Tweet>.from(decoded.map((t) => Tweet.fromMap(t)));

@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-19T21:31:23.019Z
-// Modified: 2020-04-23T22:04:38.147Z
+// Modified: 2020-04-24T21:40:59.031Z
 //
 
 import 'package:dartwitter/src/api_base.dart';
@@ -27,7 +27,9 @@ class Api extends ApiBase with Timeline {
   @override
   Future<String> request(String method, String endPoint,
       {Map<String, dynamic> parameters}) async {
+    parameters.removeWhere((key, val) => val == null);
     var response = '';
+    parameters.removeWhere((key, val) => val == null);
     var uri = _apiUri.replace(path: '${_apiUri.path}$endPoint.json');
     if (method == 'GET') {
       uri = uri.replace(queryParameters: parameters);
