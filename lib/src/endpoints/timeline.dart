@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-22T21:09:45.954Z
-// Modified: 2020-04-24T21:55:31.761Z
+// Modified: 2020-04-24T21:59:04.103Z
 //
 
 import 'dart:convert';
@@ -113,6 +113,10 @@ mixin Timeline on ApiBase {
     return List<Tweet>.from(decoded.map((t) => Tweet.fromMap(t)));
   }
 
+  /// Returns fully-hydrated Tweet objects for up to 100 Tweets per request.
+  /// This method is especially useful to get the details (hydrate) a collection
+  /// of Tweet IDs.
+  /// [ids] List<int> tweet ids
   Future<List<Tweet>> statusesLookup(List<int> ids) async {
     var method = 'GET';
     var endPoint = 'statuses/lookup';
