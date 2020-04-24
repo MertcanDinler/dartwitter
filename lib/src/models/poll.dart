@@ -6,10 +6,12 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T14:19:05.345Z
-// Modified: 2020-04-23T10:56:16.942Z
+// Modified: 2020-04-24T21:37:52.139Z
 //
 
 import 'dart:convert';
+
+import 'package:dartwitter/src/utils.dart';
 
 class Poll {
   /// An array of options, each having a poll position, and the text for that
@@ -21,16 +23,20 @@ class Poll {
 
   /// Duration of poll in minutes.
   int durationMinutes;
+  String _endDatetime;
   Poll({
     this.options,
-    this.endDatetime,
+    String endDatetime,
     this.durationMinutes,
-  });
+  }) {
+    _endDatetime = endDatetime;
+    this.endDatetime = dateTimeFromString(endDatetime);
+  }
 
   Map<String, dynamic> toMap() {
     return {
       'options': options,
-      // TODO - 'end_datetime': ,
+      'end_datetime': _endDatetime,
       'duration_minutes': durationMinutes,
     };
   }
@@ -40,7 +46,7 @@ class Poll {
 
     return Poll(
       options: map['options'],
-      // TODO - endDatetime: ,
+      endDatetime: map['end_datetime'],
       durationMinutes: map['duration_minutes'],
     );
   }
