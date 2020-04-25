@@ -6,14 +6,13 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-24T22:51:04.462Z
-// Modified: 2020-04-24T23:27:51.340Z
+// Modified: 2020-04-25T10:28:26.707Z
 //
 
 import 'dart:convert';
 
-import '../models/user.dart';
-
 import '../api_base.dart';
+import '../models/user.dart';
 
 mixin Users on ApiBase {
   /// Returns a variety of information about the user specified by the required

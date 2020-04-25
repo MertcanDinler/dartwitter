@@ -6,14 +6,13 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T13:10:33.763Z
-// Modified: 2020-04-25T10:26:02.481Z
+// Modified: 2020-04-25T10:31:15.260Z
 //
 
 import 'dart:convert';
 
-import 'tweet.dart';
-
 import '../utils.dart';
+import 'tweet.dart';
 
 /// The User object contains Twitter User account metadata that describes the
 /// Twitter User referenced. Users can author Tweets, Retweet, quote other Users
@@ -73,6 +72,8 @@ class User {
     this.createdAt = dateTimeFromString(createdAt);
   }
 
+  String toJson() => json.encode(toMap());
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -100,6 +101,13 @@ class User {
       'status': status.toMap()
     };
   }
+
+  @override
+  String toString() {
+    return 'User(id: $id, screenName: $screenName, name: $name)';
+  }
+
+  static User fromJson(String source) => fromMap(json.decode(source));
 
   static User fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
@@ -129,14 +137,5 @@ class User {
             : null,
         withheldScope: map['withheld_scope'],
         status: map['status']);
-  }
-
-  String toJson() => json.encode(toMap());
-
-  static User fromJson(String source) => fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'User(id: $id, screenName: $screenName, name: $name)';
   }
 }

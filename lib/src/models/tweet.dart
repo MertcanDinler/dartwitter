@@ -6,12 +6,11 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T12:55:38.389Z
-// Modified: 2020-04-23T12:18:31.812Z
+// Modified: 2020-04-25T10:29:32.102Z
 //
 import 'dart:convert';
 
 import '../utils.dart';
-
 import 'coordinates.dart';
 import 'entities.dart';
 import 'place.dart';
@@ -97,6 +96,8 @@ class Tweet {
     this.createdAt = dateTimeFromString(_createdAt);
   }
 
+  String toJson() => json.encode(toMap());
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -130,6 +131,13 @@ class Tweet {
       'withheld_scope': withheldScope,
     };
   }
+
+  @override
+  String toString() {
+    return 'Tweet(id: $id, screen_name:${user.screenName} text: $text)';
+  }
+
+  static Tweet fromJson(String source) => fromMap(json.decode(source));
 
   static Tweet fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
@@ -169,14 +177,5 @@ class Tweet {
           : null,
       withheldScope: map['withheld_scope'],
     );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  static Tweet fromJson(String source) => fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'Tweet(id: $id, screen_name:${user.screenName} text: $text)';
   }
 }

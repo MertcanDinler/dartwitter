@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-22T21:04:03.715Z
-// Modified: 2020-04-23T10:53:21.464Z
+// Modified: 2020-04-25T10:29:03.179Z
 //
 
 import 'dart:convert';
@@ -31,6 +31,8 @@ class Place {
     this.boundingBox,
   });
 
+  String toJson() => json.encode(toMap());
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -43,6 +45,13 @@ class Place {
       'bounding_box': boundingBox,
     };
   }
+
+  @override
+  String toString() {
+    return 'Place(id: $id, url: $url, placeType: $placeType, name: $name, fullName: $fullName, countryCode: $countryCode, country: $country, boundingBox: $boundingBox)';
+  }
+
+  static Place fromJson(String source) => fromMap(json.decode(source));
 
   static Place fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
@@ -57,14 +66,5 @@ class Place {
       country: map['country'],
       boundingBox: map['bounding_box'],
     );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  static Place fromJson(String source) => fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'Place(id: $id, url: $url, placeType: $placeType, name: $name, fullName: $fullName, countryCode: $countryCode, country: $country, boundingBox: $boundingBox)';
   }
 }

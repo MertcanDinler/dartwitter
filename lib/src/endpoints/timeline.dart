@@ -6,14 +6,13 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-22T21:09:45.954Z
-// Modified: 2020-04-24T23:19:38.019Z
+// Modified: 2020-04-25T10:28:16.365Z
 //
 
 import 'dart:convert';
 
-import '../models/tweet.dart';
-
 import '../api_base.dart';
+import '../models/tweet.dart';
 
 mixin Timeline on ApiBase {
   /// Returns the 20 most recent statuses, including retweets, posted by the
@@ -29,39 +28,6 @@ mixin Timeline on ApiBase {
     var method = 'GET';
     var endPoint = 'statuses/home_timeline';
     var parameters = {
-      'count': count?.toString(),
-      'since_id': sinceId?.toString(),
-      'max_id': maxId?.toString(),
-      'exclude_replies': excludeReplies?.toString()
-    };
-    var resp = await request(method, endPoint, parameters: parameters);
-    List decoded = json.decode(resp);
-    return List<Tweet>.from(decoded.map((t) => Tweet.fromMap(t)));
-  }
-
-  /// Returns the 20 most recent statuses posted from the user specified.
-  /// [id] Specifies the ID of the user.
-  /// [screenName] Specifies the screen name of the user.
-  /// [count] The number of results.
-  /// [sinceId] Returns only statuses with an ID greater than (that is, more
-  /// recent than) the specified ID.
-  /// [maxId] Returns only statuses with an ID less than (that is, older than)
-  /// or equal to the specified ID.
-  Future<List<Tweet>> userTimeline(
-      {int id,
-      String screenName,
-      int count,
-      int sinceId,
-      int maxId,
-      bool excludeReplies}) async {
-    if (id == null && screenName == null) {
-      throw ArgumentError('required id or screenName parameters.');
-    }
-    var method = 'GET';
-    var endPoint = 'statuses/user_timeline';
-    var parameters = {
-      'user_id': id?.toString(),
-      'screen_name': screenName,
       'count': count?.toString(),
       'since_id': sinceId?.toString(),
       'max_id': maxId?.toString(),
@@ -119,6 +85,39 @@ mixin Timeline on ApiBase {
     var method = 'GET';
     var endPoint = 'statuses/lookup';
     var parameters = {'id': ids.join(',')};
+    var resp = await request(method, endPoint, parameters: parameters);
+    List decoded = json.decode(resp);
+    return List<Tweet>.from(decoded.map((t) => Tweet.fromMap(t)));
+  }
+
+  /// Returns the 20 most recent statuses posted from the user specified.
+  /// [id] Specifies the ID of the user.
+  /// [screenName] Specifies the screen name of the user.
+  /// [count] The number of results.
+  /// [sinceId] Returns only statuses with an ID greater than (that is, more
+  /// recent than) the specified ID.
+  /// [maxId] Returns only statuses with an ID less than (that is, older than)
+  /// or equal to the specified ID.
+  Future<List<Tweet>> userTimeline(
+      {int id,
+      String screenName,
+      int count,
+      int sinceId,
+      int maxId,
+      bool excludeReplies}) async {
+    if (id == null && screenName == null) {
+      throw ArgumentError('required id or screenName parameters.');
+    }
+    var method = 'GET';
+    var endPoint = 'statuses/user_timeline';
+    var parameters = {
+      'user_id': id?.toString(),
+      'screen_name': screenName,
+      'count': count?.toString(),
+      'since_id': sinceId?.toString(),
+      'max_id': maxId?.toString(),
+      'exclude_replies': excludeReplies?.toString()
+    };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
     return List<Tweet>.from(decoded.map((t) => Tweet.fromMap(t)));

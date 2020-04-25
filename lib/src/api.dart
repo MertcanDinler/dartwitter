@@ -6,14 +6,15 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-19T21:31:23.019Z
-// Modified: 2020-04-24T23:07:18.816Z
+// Modified: 2020-04-25T10:31:52.028Z
 //
 
-import 'package:dartwitter/src/api_base.dart';
-import 'package:dartwitter/src/auth/auth_base.dart';
-import 'package:dartwitter/src/endpoints/timeline.dart';
-import 'package:dartwitter/src/endpoints/users.dart';
 import 'package:http/http.dart' as http;
+
+import 'api_base.dart';
+import 'auth/auth_base.dart';
+import 'endpoints/timeline.dart';
+import 'endpoints/users.dart';
 
 class Api extends ApiBase with Timeline, Users {
   final Uri _apiUri = Uri.parse('https://api.twitter.com/1.1/');

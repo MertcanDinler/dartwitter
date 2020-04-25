@@ -6,12 +6,12 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T14:19:05.345Z
-// Modified: 2020-04-24T21:37:52.139Z
+// Modified: 2020-04-25T10:29:18.833Z
 //
 
 import 'dart:convert';
 
-import 'package:dartwitter/src/utils.dart';
+import '../utils.dart';
 
 class Poll {
   /// An array of options, each having a poll position, and the text for that
@@ -33,6 +33,8 @@ class Poll {
     this.endDatetime = dateTimeFromString(endDatetime);
   }
 
+  String toJson() => json.encode(toMap());
+
   Map<String, dynamic> toMap() {
     return {
       'options': options,
@@ -40,6 +42,12 @@ class Poll {
       'duration_minutes': durationMinutes,
     };
   }
+
+  @override
+  String toString() =>
+      'Poll(options: $options, endDatetime: $endDatetime, durationMinutes: $durationMinutes)';
+
+  static Poll fromJson(String source) => fromMap(json.decode(source));
 
   static Poll fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
@@ -50,12 +58,4 @@ class Poll {
       durationMinutes: map['duration_minutes'],
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  static Poll fromJson(String source) => fromMap(json.decode(source));
-
-  @override
-  String toString() =>
-      'Poll(options: $options, endDatetime: $endDatetime, durationMinutes: $durationMinutes)';
 }
