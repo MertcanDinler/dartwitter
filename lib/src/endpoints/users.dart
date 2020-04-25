@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-24T22:51:04.462Z
-// Modified: 2020-04-25T10:28:26.707Z
+// Modified: 2020-04-25T17:33:35.134Z
 //
 
 import 'dart:convert';
@@ -19,7 +19,10 @@ mixin Users on ApiBase {
   /// user_id or screen_name parameter.
   /// [id] The ID of the user for whom to return results.
   /// [screenName] The screen name of the user for whom to return results.
-  Future<User> getUser({int id, String screenName}) async {
+  /// [includeEntities] The entities node that may appear within embedded
+  /// statuses will not be included when set to false.
+  Future<User> getUser(
+      {int id, String screenName, bool includeEntities}) async {
     if (id == null && screenName == null) {
       throw ArgumentError('required id or screenName parameters.');
     }
@@ -28,6 +31,7 @@ mixin Users on ApiBase {
     var parameters = {
       'id': id?.toString(),
       'screen_name': screenName?.toString(),
+      'include_entities': includeEntities?.toString()
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return User.fromJson(resp);
@@ -41,13 +45,17 @@ mixin Users on ApiBase {
   /// [page] Specifies the page of results to retrieve.
   /// [count] The number of potential user results to retrieve per page.
   /// This value has a maximum of 20.
-  Future<List<User>> searchUser(String query, {int page, int count}) async {
+  /// [includeEntities] The entities node that may appear within embedded
+  /// statuses will not be included when set to false.
+  Future<List<User>> searchUser(String query,
+      {int page, int count, bool includeEntities}) async {
     var method = 'GET';
     var endPoint = 'users/search';
     var parameters = {
       'q': query,
       'page': page.toString(),
       'count': count?.toString(),
+      'include_entities': includeEntities?.toString()
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
@@ -60,8 +68,10 @@ mixin Users on ApiBase {
   /// [ids] A list of IDs, up to 100 are allowed in a single request.
   /// [screenNames] A list of screen names, up to 100 are allowed in a
   /// single request.
+  /// [includeEntities] The entities node that may appear within embedded
+  /// statuses will not be included when set to false.
   Future<List<User>> usersLookup(
-      {List<int> ids, List<String> screenNames}) async {
+      {List<int> ids, List<String> screenNames, bool includeEntities}) async {
     if (ids == null && screenNames == null) {
       throw ArgumentError('required ids or screenNames parameters.');
     }
@@ -69,7 +79,8 @@ mixin Users on ApiBase {
     var endPoint = 'users/lookup';
     var parameters = {
       'user_id': ids?.join(','),
-      'screen_name': screenNames?.join(',')
+      'screen_name': screenNames?.join(','),
+      'include_entities': includeEntities?.toString()
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
