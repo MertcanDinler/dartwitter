@@ -6,10 +6,12 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T13:10:33.763Z
-// Modified: 2020-04-23T12:13:22.833Z
+// Modified: 2020-04-25T10:26:02.481Z
 //
 
 import 'dart:convert';
+
+import 'tweet.dart';
 
 import '../utils.dart';
 
@@ -42,29 +44,31 @@ class User {
   bool defaultProfileImage;
   List<String> withheldInCountries;
   String withheldScope;
-  User({
-    this.id,
-    this.name,
-    this.screenName,
-    this.location,
-    this.derived,
-    this.url,
-    this.description,
-    this.protected,
-    this.verified,
-    this.followersCount,
-    this.friendsCount,
-    this.listedCount,
-    this.favouritesCount,
-    this.statusesCount,
-    String createdAt,
-    this.profileBannerUrl,
-    this.profileImageUrlHttps,
-    this.defaultProfile,
-    this.defaultProfileImage,
-    this.withheldInCountries,
-    this.withheldScope,
-  }) {
+  //Returns the last tweet, if possible
+  Tweet status;
+  User(
+      {this.id,
+      this.name,
+      this.screenName,
+      this.location,
+      this.derived,
+      this.url,
+      this.description,
+      this.protected,
+      this.verified,
+      this.followersCount,
+      this.friendsCount,
+      this.listedCount,
+      this.favouritesCount,
+      this.statusesCount,
+      String createdAt,
+      this.profileBannerUrl,
+      this.profileImageUrlHttps,
+      this.defaultProfile,
+      this.defaultProfileImage,
+      this.withheldInCountries,
+      this.withheldScope,
+      this.status}) {
     _createdAt = createdAt;
     this.createdAt = dateTimeFromString(createdAt);
   }
@@ -93,6 +97,7 @@ class User {
       'withheld_in_countries':
           List<String>.from(withheldInCountries.map((x) => x)),
       'withheld_scope': withheldScope,
+      'status': status.toMap()
     };
   }
 
@@ -100,30 +105,30 @@ class User {
     if (map == null) return null;
 
     return User(
-      id: map['id'],
-      name: map['name'],
-      screenName: map['screen_name'],
-      location: map['location'],
-      derived: map['derived'],
-      url: map['url'],
-      description: map['description'],
-      protected: map['protected'],
-      verified: map['verified'],
-      followersCount: map['followers_count'],
-      friendsCount: map['friends_count'],
-      listedCount: map['listed_count'],
-      favouritesCount: map['favourites_count'],
-      statusesCount: map['statuses_count'],
-      createdAt: map['created_at'],
-      profileBannerUrl: map['profile_banner_url'],
-      profileImageUrlHttps: map['profile_image_url_https'],
-      defaultProfile: map['default_profile'],
-      defaultProfileImage: map['default_profile_image'],
-      withheldInCountries: map.containsKey('withheld_in_countries')
-          ? List<String>.from(map['withheld_in_countries'])
-          : null,
-      withheldScope: map['withheld_scope'],
-    );
+        id: map['id'],
+        name: map['name'],
+        screenName: map['screen_name'],
+        location: map['location'],
+        derived: map['derived'],
+        url: map['url'],
+        description: map['description'],
+        protected: map['protected'],
+        verified: map['verified'],
+        followersCount: map['followers_count'],
+        friendsCount: map['friends_count'],
+        listedCount: map['listed_count'],
+        favouritesCount: map['favourites_count'],
+        statusesCount: map['statuses_count'],
+        createdAt: map['created_at'],
+        profileBannerUrl: map['profile_banner_url'],
+        profileImageUrlHttps: map['profile_image_url_https'],
+        defaultProfile: map['default_profile'],
+        defaultProfileImage: map['default_profile_image'],
+        withheldInCountries: map.containsKey('withheld_in_countries')
+            ? List<String>.from(map['withheld_in_countries'])
+            : null,
+        withheldScope: map['withheld_scope'],
+        status: map['status']);
   }
 
   String toJson() => json.encode(toMap());
