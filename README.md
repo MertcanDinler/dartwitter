@@ -7,10 +7,19 @@ A Twitter API client library for Dart developers.
 A simple usage example:
 
 ```dart
+import 'dart:io';
+
 import 'package:dartwitter/dartwitter.dart';
 
-main() {
- //TODO
+void main() {
+  var handler = OAuth1Handler(
+      'api_key', 'api_key_secret');
+  handler.accessToken = AccessToken(
+      'access_token',
+      'access_token_secret');
+
+  var api = Api(handler);
+  api.getUser(screenName: 'mertcandinler0').then((object) => print(object));
 }
 ```
 
