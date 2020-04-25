@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T13:10:33.763Z
-// Modified: 2020-04-25T10:31:15.260Z
+// Modified: 2020-04-25T19:32:47.472Z
 //
 
 import 'dart:convert';
@@ -136,6 +136,6 @@ class User {
             ? List<String>.from(map['withheld_in_countries'])
             : null,
         withheldScope: map['withheld_scope'],
-        status: map['status']);
+        status: Tweet.fromMap(map['status']));
   }
 }
