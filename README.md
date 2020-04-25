@@ -10,11 +10,13 @@ A simple usage example:
 import 'dart:io';
 
 import 'package:dartwitter/dartwitter.dart';
+import 'package:dartwitter/models.dart' as models;
+
 
 void main() {
   var handler = OAuth1Handler(
       'api_key', 'api_key_secret');
-  handler.accessToken = AccessToken(
+  handler.accessToken = models.AccessToken(
       'access_token',
       'access_token_secret');
 
