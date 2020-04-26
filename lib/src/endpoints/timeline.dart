@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-22T21:09:45.954Z
-// Modified: 2020-04-25T17:37:10.554Z
+// Modified: 2020-04-26T22:29:14.874Z
 //
 
 import 'dart:convert';
@@ -32,13 +32,13 @@ mixin Timeline on ApiBase {
       bool includeEntities}) async {
     var method = 'GET';
     var endPoint = 'statuses/home_timeline';
-    var parameters = {
-      'count': count?.toString(),
-      'since_id': sinceId?.toString(),
-      'max_id': maxId?.toString(),
-      'trim_user': trimUser?.toString(),
-      'exclude_replies': excludeReplies?.toString(),
-      'include_entities': includeEntities?.toString()
+    var parameters = <String, dynamic>{
+      'count': count,
+      'since_id': sinceId,
+      'max_id': maxId,
+      'trim_user': trimUser,
+      'exclude_replies': excludeReplies,
+      'include_entities': includeEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
@@ -64,12 +64,12 @@ mixin Timeline on ApiBase {
       bool includeEntities}) async {
     var method = 'GET';
     var endPoint = 'statuses/mentions_timeline';
-    var parameters = {
-      'count': count?.toString(),
-      'since_id': sinceId?.toString(),
-      'max_id': maxId?.toString(),
-      'trim_user': trimUser?.toString(),
-      'include_entities': includeEntities?.toString()
+    var parameters = <String, dynamic>{
+      'count': count,
+      'since_id': sinceId,
+      'max_id': maxId,
+      'trim_user': trimUser,
+      'include_entities': includeEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
@@ -98,13 +98,13 @@ mixin Timeline on ApiBase {
       bool includeUserEntities}) async {
     var method = 'GET';
     var endPoint = 'statuses/retweets_of_me';
-    var parameters = {
-      'count': count?.toString(),
-      'since_id': sinceId?.toString(),
-      'max_id': maxId?.toString(),
-      'trim_user': trimUser?.toString(),
-      'include_entities': includeEntities?.toString(),
-      'include_user_entities': includeUserEntities?.toString()
+    var parameters = <String, dynamic>{
+      'count': count,
+      'since_id': sinceId,
+      'max_id': maxId,
+      'trim_user': trimUser,
+      'include_entities': includeEntities,
+      'include_user_entities': includeUserEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
@@ -124,10 +124,10 @@ mixin Timeline on ApiBase {
       {bool includeEntities, bool trimUser}) async {
     var method = 'GET';
     var endPoint = 'statuses/lookup';
-    var parameters = {
+    var parameters = <String, dynamic>{
       'id': ids.join(','),
-      'trim_user': trimUser?.toString(),
-      'include_entities': includeEntities?.toString()
+      'trim_user': trimUser,
+      'include_entities': includeEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
@@ -166,15 +166,15 @@ mixin Timeline on ApiBase {
     }
     var method = 'GET';
     var endPoint = 'statuses/user_timeline';
-    var parameters = {
-      'user_id': id?.toString(),
+    var parameters = <String, dynamic>{
+      'user_id': id,
       'screen_name': screenName,
-      'count': count?.toString(),
-      'since_id': sinceId?.toString(),
-      'max_id': maxId?.toString(),
-      'exclude_replies': excludeReplies?.toString(),
-      'trim_user': trimUser?.toString(),
-      'include_rts': includeRts?.toString()
+      'count': count,
+      'since_id': sinceId,
+      'max_id': maxId,
+      'exclude_replies': excludeReplies,
+      'trim_user': trimUser,
+      'include_rts': includeRts
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);

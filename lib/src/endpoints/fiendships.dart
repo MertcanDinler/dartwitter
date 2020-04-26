@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-26T13:43:34.870Z
-// Modified: 2020-04-26T22:13:33.125Z
+// Modified: 2020-04-26T22:28:16.883Z
 //
 
 import 'package:dartwitter/models.dart';
@@ -25,7 +25,7 @@ mixin Friendships on ApiBase {
   Future<CursorResponse<int>> friendshipsIncoming({int cursor}) async {
     var method = 'GET';
     var endPoint = 'friendships/incoming';
-    var parameters = {'cursor': cursor?.toString()};
+    var parameters = <String, dynamic>{'cursor': cursor};
     var resp = await request(method, endPoint, parameters: parameters);
     return CursorResponse.fromJson<int>(resp);
   }
@@ -40,7 +40,7 @@ mixin Friendships on ApiBase {
   Future<CursorResponse<int>> friendshipsOutgoing({int cursor}) async {
     var method = 'GET';
     var endPoint = 'friendships/outgoing';
-    var parameters = {'cursor': cursor?.toString()};
+    var parameters = <String, dynamic>{'cursor': cursor};
     var resp = await request(method, endPoint, parameters: parameters);
     return CursorResponse.fromJson<int>(resp);
   }
@@ -52,10 +52,10 @@ mixin Friendships on ApiBase {
     }
     var method = 'POST';
     var endPoint = 'friendships/create';
-    var parameters = {
-      'user_id': id?.toString(),
-      'screen_name': screenName?.toString(),
-      'follow': follow?.toString()
+    var parameters = <String, dynamic>{
+      'user_id': id,
+      'screen_name': screenName,
+      'follow': follow
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return User.fromJson(resp);
@@ -67,9 +67,9 @@ mixin Friendships on ApiBase {
     }
     var method = 'POST';
     var endPoint = 'friendships/destroy';
-    var parameters = {
-      'user_id': id?.toString(),
-      'screen_name': screenName?.toString()
+    var parameters = <String, dynamic>{
+      'user_id': id,
+      'screen_name': screenName
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return User.fromJson(resp);

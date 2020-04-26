@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-24T22:51:04.462Z
-// Modified: 2020-04-26T13:44:33.449Z
+// Modified: 2020-04-26T22:28:03.654Z
 //
 
 import 'dart:convert';
@@ -29,10 +29,10 @@ mixin Users on ApiBase {
     }
     var method = 'GET';
     var endPoint = 'users/show';
-    var parameters = {
-      'id': id?.toString(),
-      'screen_name': screenName?.toString(),
-      'include_entities': includeEntities?.toString()
+    var parameters = <String, dynamic>{
+      'id': id,
+      'screen_name': screenName,
+      'include_entities': includeEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return User.fromJson(resp);
@@ -52,11 +52,11 @@ mixin Users on ApiBase {
       {int page, int count, bool includeEntities}) async {
     var method = 'GET';
     var endPoint = 'users/search';
-    var parameters = {
+    var parameters = <String, dynamic>{
       'q': query,
-      'page': page.toString(),
-      'count': count?.toString(),
-      'include_entities': includeEntities?.toString()
+      'page': page,
+      'count': count,
+      'include_entities': includeEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
@@ -78,10 +78,10 @@ mixin Users on ApiBase {
     }
     var method = 'GET';
     var endPoint = 'users/lookup';
-    var parameters = {
+    var parameters = <String, dynamic>{
       'user_id': ids?.join(','),
       'screen_name': screenNames?.join(','),
-      'include_entities': includeEntities?.toString()
+      'include_entities': includeEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     List decoded = json.decode(resp);
@@ -111,11 +111,11 @@ mixin Users on ApiBase {
     }
     var method = 'GET';
     var endPoint = 'followers/ids';
-    var parameters = {
-      'id': id?.toString(),
-      'screen_name': screenName?.toString(),
-      'cursor': cursor?.toString(),
-      'count': count?.toString()
+    var parameters = <String, dynamic>{
+      'id': id,
+      'screen_name': screenName,
+      'cursor': cursor,
+      'count': count
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return CursorResponse.fromJson<int>(resp);
@@ -145,11 +145,11 @@ mixin Users on ApiBase {
     }
     var method = 'GET';
     var endPoint = 'friends/ids';
-    var parameters = {
-      'id': id?.toString(),
-      'screen_name': screenName?.toString(),
-      'cursor': cursor?.toString(),
-      'count': count?.toString()
+    var parameters = <String, dynamic>{
+      'id': id,
+      'screen_name': screenName,
+      'cursor': cursor,
+      'count': count
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return CursorResponse.fromJson<int>(resp);
@@ -178,13 +178,13 @@ mixin Users on ApiBase {
     }
     var method = 'GET';
     var endPoint = 'friends/list';
-    var parameters = {
-      'id': id?.toString(),
-      'screen_name': screenName?.toString(),
-      'cursor': cursor?.toString(),
-      'count': count?.toString(),
-      'skip_status': skipStatus?.toString(),
-      'include_user_entities': includeUserEntities?.toString()
+    var parameters = <String, dynamic>{
+      'id': id,
+      'screen_name': screenName,
+      'cursor': cursor,
+      'count': count,
+      'skip_status': skipStatus,
+      'include_user_entities': includeUserEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return CursorResponse.fromJson<User>(resp);
@@ -213,13 +213,13 @@ mixin Users on ApiBase {
     }
     var method = 'GET';
     var endPoint = 'followers/list';
-    var parameters = {
-      'id': id?.toString(),
-      'screen_name': screenName?.toString(),
-      'cursor': cursor?.toString(),
-      'count': count?.toString(),
-      'skip_status': skipStatus?.toString(),
-      'include_user_entities': includeUserEntities?.toString()
+    var parameters = <String, dynamic>{
+      'id': id,
+      'screen_name': screenName,
+      'cursor': cursor,
+      'count': count,
+      'skip_status': skipStatus,
+      'include_user_entities': includeUserEntities
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return CursorResponse.fromJson<User>(resp);

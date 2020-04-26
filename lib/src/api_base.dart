@@ -6,10 +6,10 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-20T09:44:42.864Z
-// Modified: 2020-04-20T10:28:56.645Z
+// Modified: 2020-04-26T22:22:29.205Z
 //
 
 abstract class ApiBase {
   Future<String> request(String method, String endPoint,
-      {Map<String, String> parameters});
+      {Map<String, dynamic> parameters});
 }

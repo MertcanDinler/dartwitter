@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-19T21:31:23.019Z
-// Modified: 2020-04-26T13:45:16.803Z
+// Modified: 2020-04-26T22:23:26.816Z
 //
 
 import 'package:http/http.dart' as http;
@@ -30,16 +30,21 @@ class Api extends ApiBase with Timeline, Users, Friendships {
   @override
   Future<String> request(String method, String endPoint,
       {Map<String, dynamic> parameters}) async {
-    parameters.removeWhere((key, val) => val == null);
+    var params = <String, String>{};
+    parameters.forEach((key, val) {
+      if (val != null) {
+        params[key] = val.toString();
+      }
+    });
     var response = '';
     var uri = _apiUri.replace(path: '${_apiUri.path}$endPoint.json');
     if (method == 'GET') {
-      uri = uri.replace(queryParameters: parameters);
+      uri = uri.replace(queryParameters: params);
       var res = await _client.get(uri.toString());
       response = res.body;
     }
     if (method == 'POST') {
-      var res = await _client.post(uri, body: parameters);
+      var res = await _client.post(uri, body: params);
       response = res.body;
     }
     return response;
