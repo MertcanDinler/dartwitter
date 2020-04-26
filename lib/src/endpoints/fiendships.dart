@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-26T13:43:34.870Z
-// Modified: 2020-04-26T22:28:16.883Z
+// Modified: 2020-04-26T22:35:41.110Z
 //
 
 import 'package:dartwitter/models.dart';
@@ -45,6 +45,11 @@ mixin Friendships on ApiBase {
     return CursorResponse.fromJson<int>(resp);
   }
 
+  /// Allows the authenticating user to follow (friend) the user specified in
+  /// the [id] or [screenName] parameter.
+  /// [id] The ID of the user to follow.
+  /// [screenName] The screen name of the user to follow.
+  /// [follow] Enable notifications for the target user.
   Future<User> createFriendship(
       {int id, String screenName, bool follow}) async {
     if (id == null && screenName == null) {
@@ -61,6 +66,10 @@ mixin Friendships on ApiBase {
     return User.fromJson(resp);
   }
 
+  /// Allows the authenticating user to unfollow the user specified in the [id]
+  /// or [screenName] parameter.
+  /// [id] The ID of the user to unfollow.
+  /// [screenName] The screen name of the user to unfollow.
   Future<User> destroyFriendship({int id, String screenName}) async {
     if (id == null && screenName == null) {
       throw ArgumentError('required ids or screenNames parameters.');
