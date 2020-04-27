@@ -6,10 +6,11 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-23T10:57:29.435Z
-// Modified: 2020-04-23T11:15:01.229Z
+// Modified: 2020-04-27T15:06:09.368Z
 //
 
 DateTime dateTimeFromString(String str) {
+  if (str == null) return null;
   var parts = str.split(' ');
   var months = [
     'jan',

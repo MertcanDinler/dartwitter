@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-19T21:31:23.019Z
-// Modified: 2020-04-26T22:23:26.816Z
+// Modified: 2020-04-27T15:39:51.745Z
 //
 
 import 'package:http/http.dart' as http;
@@ -16,8 +16,9 @@ import 'auth/auth_base.dart';
 import 'endpoints/timeline.dart';
 import 'endpoints/users.dart';
 import 'endpoints/fiendships.dart';
+import 'endpoints/statuses.dart';
 
-class Api extends ApiBase with Timeline, Users, Friendships {
+class Api extends ApiBase with Timeline, Users, Friendships, Statuses {
   final Uri _apiUri = Uri.parse('https://api.twitter.com/1.1/');
   final AuthBase _authHandler;
 
