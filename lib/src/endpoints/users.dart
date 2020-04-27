@@ -6,7 +6,7 @@
 // https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
 //
 // Created:  2020-04-24T22:51:04.462Z
-// Modified: 2020-04-26T22:28:03.654Z
+// Modified: 2020-04-27T23:36:18.740Z
 //
 
 import 'dart:convert';
@@ -223,5 +223,202 @@ mixin Users on ApiBase {
     };
     var resp = await request(method, endPoint, parameters: parameters);
     return CursorResponse.fromJson<User>(resp);
+  }
+
+  /// Returns an array of numeric user ids the authenticating user is blocking.
+  /// [cursor] Causes the results to be broken into pages. If no cursor is
+  /// provided, a value of -1 will be assumed, which is the first "page."
+  /// The response from the API will include a previous_cursor and next_cursor
+  /// to allow paging back and forth.
+  Future<CursorResponse<int>> getBlocksIds({int cursor}) async {
+    var method = 'GET';
+    var endPoint = 'blocks/ids';
+    var parameters = <String, dynamic>{
+      'cursor': cursor,
+    };
+    var resp = await request(method, endPoint, parameters: parameters);
+    return CursorResponse.fromJson<int>(resp);
+  }
+
+  /// Returns a collection of user objects that the authenticating user is
+  /// blocking.
+  /// [cursor] Causes the results to be broken into pages. If no cursor is
+  /// provided, a value of -1 will be assumed, which is the first "page."
+  /// The response from the API will include a previous_cursor and next_cursor
+  /// to allow paging back and forth.
+  /// [skipStatus] When set to either true , t or 1 statuses will not be
+  /// included in the returned user objects.
+  /// [includeEntities] The entities node will not be included when set to
+  /// false.
+  Future<CursorResponse<User>> getBlocks(
+      {int cursor, bool skipStatus, bool includeEntities}) async {
+    var method = 'GET';
+    var endPoint = 'blocks/list';
+    var parameters = <String, dynamic>{
+      'cursor': cursor,
+      'skip_status': skipStatus,
+      'include_user_entities': includeEntities
+    };
+    var resp = await request(method, endPoint, parameters: parameters);
+    return CursorResponse.fromJson<User>(resp);
+  }
+
+  /// Returns an array of numeric user ids the authenticating user has muted.
+  /// [cursor] Causes the results to be broken into pages. If no cursor is
+  /// provided, a value of -1 will be assumed, which is the first "page."
+  /// The response from the API will include a previous_cursor and next_cursor
+  /// to allow paging back and forth.
+  Future<CursorResponse<int>> getMutesIds({int cursor}) async {
+    var method = 'GET';
+    var endPoint = 'mutes/users/ids';
+    var parameters = <String, dynamic>{
+      'cursor': cursor,
+    };
+    var resp = await request(method, endPoint, parameters: parameters);
+    return CursorResponse.fromJson<int>(resp);
+  }
+
+  /// Returns an array of user objects the authenticating user has muted.
+  /// [cursor] Causes the results to be broken into pages. If no cursor is
+  /// provided, a value of -1 will be assumed, which is the first "page."
+  /// The response from the API will include a previous_cursor and next_cursor
+  /// to allow paging back and forth.
+  /// [skipStatus] When set to either true , t or 1 statuses will not be
+  /// included in the returned user objects.
+  /// [includeEntities] The entities node will not be included when set to
+  /// false.
+  Future<CursorResponse<User>> getMutes(
+      {int cursor, bool skipStatus, bool includeEntities}) async {
+    var method = 'GET';
+    var endPoint = 'mutes/users/list';
+    var parameters = <String, dynamic>{
+      'cursor': cursor,
+      'skip_status': skipStatus,
+      'include_user_entities': includeEntities
+    };
+    var resp = await request(method, endPoint, parameters: parameters);
+    return CursorResponse.fromJson<User>(resp);
+  }
+
+  /// Blocks the specified user from following the authenticating user.
+  /// In addition the blocked user will not show in the authenticating users
+  ///  mentions or timeline (unless retweeted by another user). If a follow or
+  /// friend relationship exists it is destroyed.
+  /// [id] The ID of the potentially blocked user. Helpful for disambiguating
+  /// when a valid user ID is also a valid screen name.
+  /// [screenName] The screen name of the potentially blocked user. Helpful for
+  /// disambiguating when a valid screen name is also a user ID.
+  /// [includeEntities] The entities node will not be included when set to
+  /// false.
+  /// [skipStatus] When set to either true , t or 1 statuses will not be
+  /// included in the returned user objects.
+  Future<User> createBlock(
+      {int id,
+      String screenName,
+      bool includeEntities,
+      bool skipStatus}) async {
+    if (id == null && screenName == null) {
+      throw ArgumentError('required id or screenName parameters.');
+    }
+    var method = 'POST';
+    var endPoint = 'blocks/create';
+    var parameters = <String, dynamic>{
+      'id': id,
+      'screen_name': screenName,
+      'include_entities': includeEntities,
+      'skip_status': skipStatus
+    };
+    var resp = await request(method, endPoint, parameters: parameters);
+    return User.fromJson(resp);
+  }
+
+  /// Un-blocks the user specified in the ID parameter for the authenticating
+  /// user. Returns the un-blocked user when successful. If relationships
+  /// existed before the block was instantiated, they will not be restored.
+  /// [id] The ID of the potentially blocked user. Helpful for disambiguating
+  /// when a valid user ID is also a valid screen name.
+  /// [screenName] The screen name of the potentially blocked user. Helpful for
+  /// disambiguating when a valid screen name is also a user ID.
+  /// [includeEntities] The entities node will not be included when set to
+  /// false.
+  /// [skipStatus] When set to either true , t or 1 statuses will not be
+  /// included in the returned user objects.
+  Future<User> destroyBlock(
+      {int id,
+      String screenName,
+      bool includeEntities,
+      bool skipStatus}) async {
+    if (id == null && screenName == null) {
+      throw ArgumentError('required id or screenName parameters.');
+    }
+    var method = 'POST';
+    var endPoint = 'blocks/destroy';
+    var parameters = <String, dynamic>{
+      'id': id,
+      'screen_name': screenName,
+      'include_entities': includeEntities,
+      'skip_status': skipStatus
+    };
+    var resp = await request(method, endPoint, parameters: parameters);
+    return User.fromJson(resp);
+  }
+
+  /// Mutes the user specified in the ID parameter for the authenticating user.
+  /// Returns the muted user when successful.
+  /// [id] The ID of the potentially muted user. Helpful for disambiguating when
+  /// a valid user ID is also a valid screen name.
+  /// [screenName] The screen name of the potentially muted user. Helpful for
+  /// disambiguating when a valid screen name is also a user ID.
+  Future<User> createMute({int id, String screenName}) async {
+    if (id == null && screenName == null) {
+      throw ArgumentError('required id or screenName parameters.');
+    }
+    var method = 'POST';
+    var endPoint = 'mutes/users/create';
+    var parameters = <String, dynamic>{'id': id, 'screen_name': screenName};
+    var resp = await request(method, endPoint, parameters: parameters);
+    return User.fromJson(resp);
+  }
+
+  /// Un-mutes the user specified in the ID parameter for the authenticating
+  /// user. Returns the muted user when successful.
+  /// [id] The ID of the potentially muted user. Helpful for disambiguating when
+  /// a valid user ID is also a valid screen name.
+  /// [screenName] The screen name of the potentially muted user. Helpful for
+  /// disambiguating when a valid screen name is also a user ID.
+  Future<User> destroyMute({int id, String screenName}) async {
+    if (id == null && screenName == null) {
+      throw ArgumentError('required id or screenName parameters.');
+    }
+    var method = 'POST';
+    var endPoint = 'mutes/users/destroy';
+    var parameters = <String, dynamic>{'id': id, 'screen_name': screenName};
+    var resp = await request(method, endPoint, parameters: parameters);
+    return User.fromJson(resp);
+  }
+
+  /// Report the specified user as a spam account to Twitter. Additionally,
+  /// optionally performs the equivalent of [createBlock] on behalf of the
+  /// authenticated user.
+  /// [id] The ID of the user to report as a spammer. Helpful for disambiguating
+  /// when a valid user ID is also a valid screen name.
+  /// [screenName] The screen_name of the user to report as a spammer.
+  /// Helpful for disambiguating when a valid screen name is also a user ID.
+  /// [performBlock] Whether the account should be blocked by the authenticated
+  /// user, as well as being reported for spam.
+  Future<User> reportSpam(
+      {int id, String screenName, bool performBlock}) async {
+    if (id == null && screenName == null) {
+      throw ArgumentError('required id or screenName parameters.');
+    }
+    var method = 'POST';
+    var endPoint = 'users/report_spam';
+    var parameters = <String, dynamic>{
+      'id': id,
+      'screen_name': screenName,
+      'perform_block': performBlock
+    };
+    var resp = await request(method, endPoint, parameters: parameters);
+    return User.fromJson(resp);
   }
 }
