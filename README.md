@@ -3,7 +3,7 @@ A Twitter API client library for Dart developers.
 > **I'm just develop, not testing** :innocent:
 
 ## Donate
-:star: Patreon: [Mertcan Dinler](https://www.patreon.com/MertcanDinler "Mertcan Dinler")
+[![](https://raw.githubusercontent.com/MertcanDinler/dartwitter/master/.img/become-a-patreon.png)](https://www.patreon.com/MertcanDinler)
 
 ## Usage
 Authorization
