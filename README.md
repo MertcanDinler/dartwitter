@@ -2,6 +2,9 @@ A Twitter API client library for Dart developers.
 
 > **I'm just develop, not testing** :innocent:
 
+## Donate
+:star: Patreon: [Mertcan Dinler](https://www.patreon.com/MertcanDinler "Mertcan Dinler")
+
 ## Usage
 Authorization
 
