@@ -1,6 +1,6 @@
 A Twitter API client library for Dart developers.
 
-> **I'm just develop, not testing** :innocent:
+> **Just developing, not testing** :innocent:
 
 ## Donate
 [![](https://raw.githubusercontent.com/MertcanDinler/dartwitter/master/.img/become-a-patreon.png)](https://www.patreon.com/MertcanDinler)
