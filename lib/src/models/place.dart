@@ -3,7 +3,7 @@
 // place.dart (c) 2020
 //
 // This software is released under the MIT License.
-// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+// https://raw.githubusercontent.com/mertcandinler/dartwitter/master/LICENSE
 //
 // Created:  2020-04-22T21:04:03.715Z
 // Modified: 2020-04-25T10:29:03.179Z

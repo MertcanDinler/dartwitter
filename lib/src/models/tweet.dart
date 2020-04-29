@@ -3,7 +3,7 @@
 // tweet.dart (c) 2020
 //
 // This software is released under the MIT License.
-// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+// https://raw.githubusercontent.com/mertcandinler/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T12:55:38.389Z
 // Modified: 2020-04-25T10:29:32.102Z

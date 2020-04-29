@@ -3,7 +3,7 @@
 // entities.dart (c) 2020
 //
 // This software is released under the MIT License.
-// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+// https://raw.githubusercontent.com/mertcandinler/dartwitter/master/LICENSE
 //
 // Created:  2020-04-21T13:21:55.426Z
 // Modified: 2020-04-23T12:16:25.407Z

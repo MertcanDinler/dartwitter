@@ -5,7 +5,7 @@ import 'dart:convert';
 // retweet.dart (c) 2020
 //
 // This software is released under the MIT License.
-// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+// https://raw.githubusercontent.com/mertcandinler/dartwitter/master/LICENSE
 //
 // Created:  2020-04-27T15:32:24.959Z
 // Modified: 2020-04-27T15:37:52.193Z

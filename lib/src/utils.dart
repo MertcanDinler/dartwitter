@@ -3,7 +3,7 @@
 // utils.dart (c) 2020
 //
 // This software is released under the MIT License.
-// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+// https://raw.githubusercontent.com/mertcandinler/dartwitter/master/LICENSE
 //
 // Created:  2020-04-23T10:57:29.435Z
 // Modified: 2020-04-27T15:06:09.368Z

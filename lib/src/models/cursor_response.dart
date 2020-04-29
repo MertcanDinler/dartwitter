@@ -1,3 +1,14 @@
+//
+// Author: Mertcan Dinler (mertdinlerin@gmail.com)
+// cursor_response.dart (c) 2020
+//
+// This software is released under the MIT License.
+// https://raw.githubusercontent.com/mertcandinler/dartwitter/master/LICENSE
+//
+// Created:  2020-04-22T21:06:36.334Z
+// Modified: 2020-04-23T10:39:13.078Z
+//
+
 import 'dart:collection';
 import 'dart:convert';
 

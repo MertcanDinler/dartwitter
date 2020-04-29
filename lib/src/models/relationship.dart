@@ -3,7 +3,7 @@
 // relationship.dart (c) 2020
 //
 // This software is released under the MIT License.
-// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+// https://raw.githubusercontent.com/mertcandinler/dartwitter/master/LICENSE
 //
 // Created:  2020-04-27T10:12:30.412Z
 // Modified: 2020-04-27T12:14:26.999Z

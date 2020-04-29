@@ -3,7 +3,7 @@
 // dartwitter_exception.dart (c) 2020
 //
 // This software is released under the MIT License.
-// https://raw.githubusercontent.com/mrtcndnlr/dartwitter/master/LICENSE
+// https://raw.githubusercontent.com/mertcandinler/dartwitter/master/LICENSE
 //
 // Created:  2020-04-18T22:00:12.789Z
 // Modified: 2020-04-20T10:37:52.317Z
